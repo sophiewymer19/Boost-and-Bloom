@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berry Boost | Boost & Bloom</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="top-ribbon">GOOD FOOD • BRIGHTER DAYS • GOOD FOOD • BRIGHTER DAYS •</div>
+<header class="site-header">
+  <a class="brand" href="index.html"><img src="assets/company-logo.png" alt="Boost & Bloom Berry Boost"></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a class="active" href="product.html">Berry Boost</a>
+    <a href="index.html#story">Our Story</a>
+    <a href="index.html#marketing">Our Community</a>
+    <a class="nav-cart" href="cart.html">Cart <span id="cart-count">0</span></a>
+  </nav>
+</header>
+
+<main>
+<section class="product-top">
+  <div class="product-gallery">
+    <div class="main-image-wrap">
+      <span class="image-badge">450g</span>
+      <img id="main-product-image" src="assets/product-packaging.png" alt="Berry Boost cereal packaging">
+    </div>
+    <div class="thumbs">
+      <button class="thumb active" data-image="assets/product-packaging.png"><img src="assets/product-packaging.png" alt=""></button>
+      <button class="thumb" data-image="assets/social-media-ad.png"><img src="assets/social-media-ad.png" alt=""></button>
+      <button class="thumb" data-image="assets/company-logo.png"><img src="assets/company-logo.png" alt=""></button>
+    </div>
+  </div>
+
+  <div class="product-copy">
+    <p class="eyebrow">BOOST & BLOOM · BERRY BOOST</p>
+    <h1>Berry Boost</h1>
+    <div class="product-tag">CRUNCHY BERRY WHOLE GRAIN CEREAL</div>
+    <div class="price">$9.99 <small>NZD · demo price</small></div>
+    <p class="large-copy">A crunchy breakfast cereal containing whole grains, dried berries, nuts and seeds — designed for busy students who want breakfast that is convenient, nutritious and satisfying.</p>
+    <p>The main berry flavour is supported by honey/maple and the warm flavour of cinnamon and vanilla.</p>
+
+    <div class="ingredient-line"><span>🍓</span><span>🥜</span><span>🌱</span><span>🍯</span><span>♡</span><span>✿</span></div>
+
+    <div class="buy-card">
+      <div class="buy-top"><strong>Berry Boost · 450g</strong><span>In stock</span></div>
+      <label for="quantity">Quantity</label>
+      <div class="quantity-row">
+        <input id="quantity" type="number" min="1" value="1">
+        <button id="add-to-cart" class="btn btn-berry">Add to cart</button>
+      </div>
+      <p id="cart-message"></p>
+    </div>
+
+    <div class="feature-list">
+      <div><b>♡</b><span><strong>Busy-morning friendly</strong><br>Made for quick breakfast routines.</span></div>
+      <div><b>✿</b><span><strong>Berry focused</strong><br>Berries are the defining flavour.</span></div>
+      <div><b>✦</b><span><strong>Crunchy texture</strong><br>A satisfying mix of grains, fruit, nuts and seeds.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="product-story">
+  <div>
+    <p class="eyebrow">WHAT'S INSIDE</p>
+    <h2>Ingredients with a little personality.</h2>
+    <p>Rolled oats, puffed brown rice, dried cranberries and mixed berries, almonds, pumpkin seeds, sunflower seeds, chia seeds, honey/maple, vanilla, cinnamon and a little salt.</p>
+  </div>
+  <div class="ingredient-display">
+    <div class="ingredient-circle">🍓</div>
+    <div class="ingredient-circle">🥜</div>
+    <div class="ingredient-circle">🌱</div>
+    <div class="ingredient-circle">🍯</div>
+    <div class="ingredient-circle">♡</div>
+    <div class="ingredient-circle">✿</div>
+  </div>
+</section>
+
+<section class="note-box">
+  <strong>A note about our project claims:</strong> The benefits above are intended product benefits from the Berry Boost concept. Further nutritional analysis and consumer testing would be required to confirm specific health or performance claims.
+</section>
+</main>
+
+<footer>
+  <div class="footer-brand"><img src="assets/company-logo.png" alt="Boost & Bloom"><p>Good food. Brighter days.</p></div>
+  <div class="footer-links"><a href="index.html">Home</a><a href="product.html">Berry Boost</a><a href="cart.html">Cart</a></div>
+  <div class="footer-small">© 2026 Boost & Bloom · Demo website</div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+const mainImage = document.getElementById('main-product-image');
+document.querySelectorAll('.thumb').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.thumb').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    mainImage.src = btn.dataset.image;
+  });
+});
+document.getElementById('add-to-cart').addEventListener('click', () => {
+  const qty = Math.max(1, parseInt(document.getElementById('quantity').value || '1'));
+  addToCart(qty);
+  document.getElementById('cart-message').textContent = `${qty} ${qty === 1 ? 'box' : 'boxes'} added — ready for checkout ♡`;
+});
+</script>
+</body>
+</html>

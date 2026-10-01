@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart | Boost & Bloom</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="top-ribbon">GOOD FOOD • BRIGHTER DAYS • GOOD FOOD • BRIGHTER DAYS •</div>
+<header class="site-header">
+  <a class="brand" href="index.html"><img src="assets/company-logo.png" alt="Boost & Bloom Berry Boost"></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="product.html">Berry Boost</a>
+    <a href="index.html#story">Our Story</a>
+    <a href="index.html#marketing">Our Community</a>
+    <a class="nav-cart active" href="cart.html">Cart <span id="cart-count">0</span></a>
+  </nav>
+</header>
+
+<main class="cart-page">
+  <section class="cart-heading">
+    <p class="eyebrow">YOUR BERRY BOOST</p>
+    <h1>Ready for a brighter morning?</h1>
+    <p>This is a demo checkout flow created for the Boost & Bloom website project.</p>
+  </section>
+
+  <div class="checkout-layout">
+    <section class="cart-panel">
+      <div class="panel-heading"><h2>Your cart</h2><span id="cart-label">0 items</span></div>
+      <div id="cart-items"></div>
+      <div class="total-row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+      <a href="product.html" class="text-link">← Keep shopping</a>
+    </section>
+
+    <section class="checkout-panel">
+      <div class="checkout-title">
+        <span class="flower-mark">✿</span>
+        <div><p class="eyebrow">BOOST & BLOOM</p><h2>Checkout</h2></div>
+      </div>
+      <form id="checkout-form">
+        <label>Full name<input required type="text" placeholder="Your name"></label>
+        <label>Email address<input required type="email" placeholder="you@example.com"></label>
+        <label>Delivery address<input required type="text" placeholder="Street, suburb, city"></label>
+        <label>Payment method
+          <select required><option value="">Choose a demo payment method</option><option>Demo card payment</option><option>Demo PayPal</option></select>
+        </label>
+        <button class="btn btn-berry full-width" type="submit">Place demo order ♡</button>
+      </form>
+      <p class="secure-note">🔒 Demo only — no real payment is processed.</p>
+    </section>
+  </div>
+
+  <div id="order-success" class="success-box" hidden>
+    <div class="success-flower">✿</div>
+    <p class="eyebrow">THANK YOU</p>
+    <h2>Your Berry Boost order is in!</h2>
+    <p>This demo checkout has been completed successfully.</p>
+    <a class="btn btn-berry" href="index.html">Back to Boost & Bloom</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-brand"><img src="assets/company-logo.png" alt="Boost & Bloom"><p>Good food. Brighter days.</p></div>
+  <div class="footer-links"><a href="index.html">Home</a><a href="product.html">Berry Boost</a></div>
+  <div class="footer-small">© 2026 Boost & Bloom · Demo website</div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+const PRICE = 9.99;
+function renderCart(){
+  const qty = getCartQty();
+  document.getElementById('cart-count').textContent = qty;
+  document.getElementById('cart-label').textContent = `${qty} ${qty === 1 ? 'item' : 'items'}`;
+  document.getElementById('subtotal').textContent = `$${(qty * PRICE).toFixed(2)}`;
+  const box = document.getElementById('cart-items');
+  if(!qty){
+    box.innerHTML = `<div class="empty-cart"><div class="empty-icon">♡</div><h3>Your cart is empty</h3><p>Add Berry Boost and come back here to see your order.</p><a class="btn btn-berry" href="product.html">Shop Berry Boost</a></div>`;
+    return;
+  }
+  box.innerHTML = `<div class="cart-item">
+    <img src="assets/product-packaging.png" alt="Berry Boost">
+    <div><h3>Berry Boost</h3><p>450g · Crunchy berry whole grain cereal</p>
+      <div class="qty-control"><button id="minus">−</button><span>${qty}</span><button id="plus">+</button></div>
+    </div><strong>$${(qty*PRICE).toFixed(2)}</strong>
+  </div>`;
+  document.getElementById('minus').onclick=()=>{setCartQty(qty-1);renderCart()};
+  document.getElementById('plus').onclick=()=>{setCartQty(qty+1);renderCart()};
+}
+document.getElementById('checkout-form').addEventListener('submit', e=>{
+  e.preventDefault();
+  if(!getCartQty()){ alert('Please add Berry Boost to your cart first.'); return; }
+  document.querySelector('.checkout-layout').hidden=true;
+  document.getElementById('order-success').hidden=false;
+  setCartQty(0);
+});
+renderCart();
+</script>
+</body>
+</html>
